@@ -12,7 +12,7 @@
     <span class="text-sm font-medium">Patient</span>
 </x-dashboard.nav-link>
 
-<x-dashboard.nav-link href="{{ route('examination') }}" :active="request()->is('examination')">
+<x-dashboard.nav-link href="{{ route('examination') }}" :active="request()->is('examination*')">
     <x-heroicon-o-document-text class="h-5 w-5" />
     <span class="text-sm font-medium">Examination</span>
 </x-dashboard.nav-link>

@@ -33,6 +33,6 @@ class PatientController extends Controller
 
         return redirect()
         ->route('patient')
-        ->with('success', 'New Patient Created Successfully!');
+        ->with('success', 'New Patient Successfully Created!');
     }
 }

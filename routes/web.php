@@ -3,6 +3,7 @@
 use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\UserController;
+use App\Services\ExternalApiAuth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,8 +19,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('examination')->group(function () {
         Route::get('/', [ExaminationController::class, 'indexExamination'])->name('examination');
+        Route::get('/new', [ExaminationController::class, 'indexNewExamination'])->name('new_exam');
+        Route::post('/new', [ExaminationController::class, 'createNewExamination'])->name('create_new_exam');
     });
 });
+
+
 
 Route::prefix('access')->group(function () {
     Route::get('/', [UserController::class, 'indexAccess'])->name('login');

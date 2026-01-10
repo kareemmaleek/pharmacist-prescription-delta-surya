@@ -15,11 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('patient_id')->constrained(
                 table: 'patients',
-                indexName: 'patient_id'
             );
             $table->foreignId('doctor_id')->constrained(
                 table: 'users',
-                indexName: 'doctor_id'
             );
 
             $table->timestamp('examined_at');
@@ -29,7 +27,7 @@ return new class extends Migration
             $table->integer('diastole')->nullable();
             $table->integer('heart_rate')->nullable();
             $table->integer('respiration_rate')->nullable();
-            $table->integer('body_temp')->nullable();
+            $table->decimal('body_temp', 4, 1)->nullable();
             $table->text('doctor_notes')->nullable();
             $table->json('attachments')->nullable();
             $table->enum('status', ['prescribed', 'served'])->default('prescribed');
@@ -37,7 +35,7 @@ return new class extends Migration
                 table: 'users',
                 indexName: 'pharmacist_id'
             );
-            $table->timestamp('served_at');
+            $table->timestamp('served_at')->nullable();
             $table->timestamps();
         });
     }
