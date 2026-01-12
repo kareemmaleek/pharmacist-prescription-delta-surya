@@ -2,19 +2,27 @@
 
 namespace App\Services;
 
+use App\Http\Controllers\AuditLogsController;
+use Ramsey\Uuid\Uuid;
 use App\Models\Patient;
 use App\Models\Examination;
+use App\Models\Prescriptions;
 use App\Models\ExaminationFiles;
 use App\Models\PrescriptionItems;
-use App\Models\Prescriptions;
 use App\Services\ExternalApiAuth;
-use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\DB;
 use function Illuminate\Support\now;
 use Illuminate\Support\Facades\Auth;
-use Ramsey\Uuid\Uuid;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ExaminationService{
+
+    protected AuditLogsService $logs;
+
+    public function __construct(AuditLogsService $logs) {
+        $this->logs = $logs;
+    }
 
     public function createNewExamination(array $data, ?array $attachment, $service)
     {
@@ -66,8 +74,6 @@ class ExaminationService{
 
             }
 
-           
-
             $uploadedFile = [];
 
             if(!empty($attachment)){
@@ -86,21 +92,84 @@ class ExaminationService{
                     ];
                 }
 
+                $attachmentIds = [];
+
                 foreach ($uploadedFile as $file){
-                    ExaminationFiles::create([
+                    $examFile = ExaminationFiles::create([
                         "examination_id" => $exam->id,
                         "file_name" => $file['file_name'],
                         "file_path" => $file['file_path']
                     ]);
+
+                    $attachmentIds[] = $examFile->id;
+                    
+                }
+
+            }
+            
+          
+            $this->logs->createLogs("CREATE NEW EXAMINATION", "Has been created new examination with exam_id: " . $exam->examination_code);
+        });
+    }
+
+    public function examinationData(string $exam_id)
+    {
+        $examData = Examination::where('examination_code', '=', $exam_id)->firstOrFail();
+        return $examData;
+    }
+
+    public function updateExamination(array $data, $exam_id, $medicineData, $service)
+    {
+        // dd($medicineData);
+
+        return DB::transaction(function () use ($data, $exam_id, $medicineData, $service) {
+            $dataExam = Examination::where('examination_code', '=', $exam_id)->firstOrFail();
+            $dataExam->update($data);
+
+            if(!empty($medicineData)){
+                $medicineItems = $dataExam->prescription()->first();
+
+                $medicineItems->items()->delete();
+
+                foreach ($medicineData as $medicine) {
+                    $getPrice           = $service->getMedicinePrice($medicine['id']);
+                    $dataPrice          = $getPrice['prices'] ?? [];
+                    if(empty($dataPrice)) return throw new \Exception('Price not found for medicine ID: ' . $medicine['id']);
+                    $lastUnitPrice      = $dataPrice[array_key_last($dataPrice)]["unit_price"];
+                    $calc               = $medicine['qty'] * $lastUnitPrice;
+
+                    $medicineItems->items()->create([
+                        "medicine_id" => $medicine['id'],
+                        "medicine_name" => $medicine['name'],
+                        "price" => $lastUnitPrice,
+                        "qty" => $medicine['qty'],
+                        "subtotal" => $calc,
+                    ]);
+
                 }
             }
 
-            
+            $this->logs->createLogs('UPDATE EXAMINATION', 'Has been updated examination with exam_code: ' . $exam_id);
 
-            
         });
 
-        
-
     }
+
+    public function deleteExamination($exam_id)
+    {
+
+        return DB::transaction(function () use ($exam_id) {
+            $dataExam = Examination::where('examination_code', '=', $exam_id)->firstOrFail();
+
+            $dataExam->update([
+                "status" => 'deleted'
+            ]);
+            
+            $this->logs->createLogs('DELETE EXAMINATION', 'Has been deleted examination with exam_code: ' . $exam_id);
+
+            return $dataExam;
+        });
+        
+    }
+
 }

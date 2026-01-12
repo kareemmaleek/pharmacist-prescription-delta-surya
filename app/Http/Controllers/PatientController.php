@@ -26,13 +26,16 @@ class PatientController extends Controller
 
     public function proceedNewPatient(NewPatientRequest $request, PatientService $service)
     {
+        try{
+            if(Auth::user()->role !== 0) return redirect()->back()->with('error', 'No Permission!');
 
-        if(Auth::user()->role !== 0) return redirect()->back()->with('error', 'No Permission!');
+            $service->createNewPatient($request->validated());
 
-        $service->createNewPatient($request->validated());
-
-        return redirect()
-        ->route('patient')
-        ->with('success', 'New Patient Successfully Created!');
+            return redirect()
+            ->route('patient')
+            ->with('success', 'New Patient Successfully Created!');
+        }catch(\Exception $e){
+            return redirect()->route('patient')->with('error', 'Uh-oh!, Something when wrong');
+        }
     }
 }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('examinations', function (Blueprint $table) {
             $table->id();
+            $table->string('examination_code')->unique();
             $table->foreignId('patient_id')->constrained(
                 table: 'patients',
             );
@@ -29,8 +30,7 @@ return new class extends Migration
             $table->integer('respiration_rate')->nullable();
             $table->decimal('body_temp', 4, 1)->nullable();
             $table->text('doctor_notes')->nullable();
-            $table->json('attachments')->nullable();
-            $table->enum('status', ['prescribed', 'served'])->default('prescribed');
+            $table->enum('status', ['prescribed', 'served', 'deleted'])->default('prescribed');
             $table->foreignId('pharmacist_id')->nullable()->constrained(
                 table: 'users',
                 indexName: 'pharmacist_id'

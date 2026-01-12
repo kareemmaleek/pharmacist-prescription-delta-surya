@@ -8,6 +8,13 @@ use Illuminate\Validation\ValidationException;
 
 class UserService{
 
+    protected AuditLogsService $logs;
+
+    public function __construct(AuditLogsService $logs)
+    {
+        $this->logs = $logs;
+    }
+
     public function proceedLogin(array $credentials): User
     {
         if (!Auth::attempt($credentials)) {
@@ -17,6 +24,18 @@ class UserService{
         }
         
         return Auth::user();
+    }
+
+    public function proceedLogout($req)
+    {
+        $user = Auth::user();
+        
+
+        $this->logs->createLogs('LOGOUT', $user->email . ' has been logout.');
+        
+        Auth::logout();
+        $req->session()->invalidate();
+        $req->session()->regenerateToken();
     }
 
 }

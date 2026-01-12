@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('examination_files', function (Blueprint $table) {
+        Schema::create('audit_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('examination_id')->constrained('examinations')->cascadeOnDelete();
-            $table->string('file_name');
-            $table->text('file_path');
+            $table->foreignId('user_id')->constrained();
+            $table->string('ip_address');
+            $table->string('module');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('examination_files');
+        Schema::dropIfExists('audit_logs');
     }
 };

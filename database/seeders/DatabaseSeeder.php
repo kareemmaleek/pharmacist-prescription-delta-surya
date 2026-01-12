@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Patient;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Patient;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +17,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
         $this->call(Adminseeder::class);
 
@@ -24,6 +24,15 @@ class DatabaseSeeder extends Seeder
             "role" => fn () => rand(1,2),
         ]);
 
-        Patient::factory(25)->create();
+        Patient::factory(25)->create([
+            "patient_code" => fn () => $this->patient_code(),
+        ]);
+    }
+
+    public function patient_code()
+    {
+        $period = now()->format('Ym');
+        
+        return "PX-" . $period . rand(1000,9999);
     }
 }

@@ -17,9 +17,9 @@
     <span class="text-sm font-medium">Examination</span>
 </x-dashboard.nav-link>
 
-<x-dashboard.nav-link href="/" :active="request()->is('prescription')">
-    <x-heroicon-o-eye-dropper class="h-5 w-5" />
-    <span class="text-sm font-medium">Prescription</span>
+<x-dashboard.nav-link href="{{ route('transaction') }}" :active="request()->is('transaction*')">
+    <x-heroicon-o-banknotes class="h-5 w-5" />
+    <span class="text-sm font-medium">Transactions</span>
 </x-dashboard.nav-link>
 
 <div class="w-full px-2">

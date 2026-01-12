@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Services\ExternalApiAuth;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,19 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('examination')->group(function () {
         Route::get('/', [ExaminationController::class, 'indexExamination'])->name('examination');
         Route::get('/new', [ExaminationController::class, 'indexNewExamination'])->name('new_exam');
+        Route::get('/edit/{exam_id}', [ExaminationController::class, 'indexEditExamination'])->name('edit_exam');
         Route::post('/new', [ExaminationController::class, 'createNewExamination'])->name('create_new_exam');
+        Route::put('/edit/{exam_id}', [ExaminationController::class, 'updateExamination'])->name('update_exam');
+        Route::delete('/delete/{exam_id}', [ExaminationController::class, 'deleteExamination'])->name('delete_exam');
+    });
+
+    Route::prefix('transaction')->group(function() {
+        Route::get('/', [TransactionController::class, 'indexTransaction'])->name('transaction');
+        Route::get('/new/{exam_id}', [TransactionController::class, 'indexNewTransaction'])->name('new_transaction');
+        Route::get('/receipt/{tx_code}', [TransactionController::class, 'indexReceipt'])->name('receipt');
+        Route::get('/receipt/{tx_code}/download', [TransactionController::class, 'createReceipt'])->name('create_receipt');
+        Route::post('/new/{exam_id}', [TransactionController::class, 'createNewTransaction'])->name('create_new_transaction');
+
     });
 });
 

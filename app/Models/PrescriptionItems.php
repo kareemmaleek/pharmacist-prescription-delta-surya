@@ -16,4 +16,13 @@ class PrescriptionItems extends Model
     ];
 
     protected $table = 'prescription_items';
+
+    public function customData()
+    {
+        return [
+            "id" => $this->medicine_id,
+            "name" => $this->medicine_name,
+            "qty" => $this->qty,
+        ];
+    }
 }
