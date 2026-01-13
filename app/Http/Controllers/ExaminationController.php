@@ -23,7 +23,7 @@ class ExaminationController
 
     public function indexNewExamination(ExternalApiAuth $service)
     {
-        if(Auth::user()->role !== 2 || Auth::user()->role !== 0) return redirect()->route('examination')->with('error', 'No Permission!');
+        if(Auth::user()->role !== 2 && Auth::user()->role !== 0) return redirect()->route('examination')->with('error', 'No Permission!');
 
         $query = Patient::query();
         $patients = $query->get();
@@ -35,7 +35,7 @@ class ExaminationController
 
     public function indexEditExamination($exam_id, ExaminationService $service, ExternalApiAuth $serviceExternal)
     {
-        if(Auth::user()->role !== 2 || Auth::user()->role !== 0) return redirect()->route('examination')->with('error', 'No Permission!');
+        if(Auth::user()->role !== 2 && Auth::user()->role !== 0) return redirect()->route('examination')->with('error', 'No Permission!');
 
         $medicines  = $serviceExternal->getMedicine();
         $exam       = $service->examinationData($exam_id);
@@ -49,7 +49,7 @@ class ExaminationController
     public function createNewExamination(NewExaminationRequest $request, ExaminationService $service, ExternalApiAuth $serviceExternal)
     {
         try{
-            if(Auth::user()->role !== 2 || Auth::user()->role !== 0) return redirect()->route('examination')->with('error', 'No Permission!');
+            if(Auth::user()->role !== 2 && Auth::user()->role !== 0) return redirect()->route('examination')->with('error', 'No Permission!');
 
             $service->createNewExamination($request->validated(), $request->file('attachments'), $serviceExternal);
 
@@ -64,7 +64,7 @@ class ExaminationController
     public function updateExamination($exam_id, UpdateExaminationRequest $request, ExaminationService $service, ExternalApiAuth $serviceExternal)
     {
         try{
-            if(Auth::user()->role !== 2 || Auth::user()->role !== 0) return redirect()->route('examination')->with('error', 'No Permission!');
+            if(Auth::user()->role !== 2 && Auth::user()->role !== 0) return redirect()->route('examination')->with('error', 'No Permission!');
 
             $medicineData = $request->input('medicines', []);
             $service->updateExamination($request->validated(), $exam_id, $medicineData, $serviceExternal);
@@ -80,7 +80,7 @@ class ExaminationController
     public function deleteExamination($exam_id, ExaminationService $service)
     {
         try{
-            if(Auth::user()->role !== 2 || Auth::user()->role !== 0) return redirect()->route('examination')->with('error', 'No Permission!');
+            if(Auth::user()->role !== 2 && Auth::user()->role !== 0) return redirect()->route('examination')->with('error', 'No Permission!');
 
             $service->deleteExamination($exam_id);
 

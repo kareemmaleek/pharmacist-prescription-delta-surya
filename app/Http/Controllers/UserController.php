@@ -24,13 +24,6 @@ class UserController
         $this->logs = $logs;
     }
 
-    public function indexDashboard()
-    {
-
-        return view('dashboard.index');
-        
-    }
-
     public function indexUser()
     {
         if(Auth::user()->role !== 0) return redirect()->route('dashboard')->with('error', 'No Permission!');

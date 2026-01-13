@@ -94,8 +94,8 @@ class Examination extends Model
         return $this->hasMany(ExaminationFiles::class, 'examination_id');
     }
 
-    public function prescription(): BelongsTo
+    public function prescriptions(): HasMany
     {
-        return $this->belongsTo(Prescriptions::class, 'id', 'examination_id');
+        return $this->hasMany(Prescriptions::class, 'examination_id', 'id');
     }
 }

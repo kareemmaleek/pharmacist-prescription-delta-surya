@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuditLogsController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\TransactionController;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [UserController::class, 'indexDashboard'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'indexDashboard'])->name('dashboard');
 
     Route::prefix('patient')->group(function(){
         Route::get('/', [PatientController::class, 'indexPatient'])->name('patient');
