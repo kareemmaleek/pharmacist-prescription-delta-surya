@@ -7,7 +7,16 @@
 - Apoteker: hanya menampilkan/mengakses/mengoperasikan menu Dashboard, Patient, Examination & Transaction.
 - Administrator: dapat menampilkan/mengakses/mengoperasikan semua menu pada App.
 
+### B. Credentials (demo)
+| Role | Data |
+| ------ | ------ |
+| Administrator | musafeerbinmalik@gmail.com : 123456789 |
+| Apoteker | radensuyoso@gmail.com : 123456789 |
+| Dokter | abdulmaqruf@gmail.com : 123456789 |
+
 ---
+
+## Installation
 
 ## Dokumentasi Alur App:
 
@@ -59,4 +68,3 @@
 
 ### G. Audit Logs Page
 - administrator dapat monitoring aktivitas user pada menu ini.
-
