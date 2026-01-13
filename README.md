@@ -18,6 +18,60 @@
 
 ## Installation
 
+### 1. System Requirement
+- PHP ≥ 8.3
+- Composer ≥ 2.6
+- MySQL
+- Node.js ≥ 18
+- Git
+
+### 2. Clone Repository
+
+```sh
+git clone https://github.com/kareemmaleek/pharmacist-prescription-delta-surya.git
+cd pharmacist-prescription-delta-surya
+```
+
+### 3. Install Backend Dependencies
+
+```sh
+composer install
+```
+
+### 4. Environment Configuration
+
+Copy `.env` dari lokal
+
+Lalu
+
+```sh 
+php artisan key:generate
+```
+
+### 5. Database Setup
+
+Buat database kosong dengan nama `pharmacist_prescription`
+
+Lalu jalankan migrasi dengan seeder untuk data dummy
+
+```sh
+php artisan migrate --seed
+```
+
+### 6. Storage & Filesystem
+
+Buat symbolic link storage:
+```sh
+php artisan storage:link
+```
+
+### 7. Menjalankan Aplikasi (mode dev)
+```sh
+composer run dev
+```
+
+---
+
 ## Dokumentasi Alur App:
 
 ### A. Access Page
