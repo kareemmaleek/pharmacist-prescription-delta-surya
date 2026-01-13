@@ -1,4 +1,4 @@
-<div class="h-full w-[450px] py-5">
+<div class="h-full w-full py-5 lg:w-[450px]">
 
     <form action="{{ route('create_new_patient') }}" method="POST">
         @csrf

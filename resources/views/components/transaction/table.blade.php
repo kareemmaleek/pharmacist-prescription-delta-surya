@@ -95,8 +95,12 @@
 
                     <td scope="row" class="whitespace-nowrap px-6 py-2 font-medium">
                         <div class="flex items-center gap-2">
+                            <a href="{{ route('receipt', $item->tx_code) }}" target="_blank"
+                                class="cursor-pointer rounded-sm bg-violet-400 p-1 text-white hover:opacity-90">
+                                <x-heroicon-o-eye class="h-5 w-5" />
+                            </a>
                             <a href="{{ route('create_receipt', $item->tx_code) }}"
-                                class="cursor-pointer rounded-sm bg-amber-400 p-1 hover:opacity-90">
+                                class="cursor-pointer rounded-sm bg-amber-400 p-1 text-white hover:opacity-90">
                                 <x-heroicon-o-document-arrow-down class="h-5 w-5" />
                             </a>
                         </div>

@@ -1,7 +1,8 @@
 <x-dashboard.layout>
     <div class="flex h-full w-full flex-col gap-3 px-3">
 
-        <div class="flex h-20 w-full items-center justify-center gap-4 rounded-b-md bg-white">
+        <div
+            class="flex h-fit w-full flex-wrap items-center justify-center gap-2 rounded-b-md bg-white p-4 md:h-20 md:gap-4 md:p-0 lg:flex-nowrap">
             <x-examination.navigation />
         </div>
 

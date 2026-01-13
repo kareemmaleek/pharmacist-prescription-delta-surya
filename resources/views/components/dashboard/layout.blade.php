@@ -20,20 +20,21 @@
 <body>
     @include('components._flashmessage')
     <div class="flex h-dvh w-full bg-[var(--bgColor)]">
-        <div class="h-full w-56 bg-white">
+        <div class="h-full w-14 bg-white lg:w-56">
 
             {{-- <form action="{{ route('proceed_logout') }}" method="POST">
                 @csrf
                 <button type="submit">LOGOUT</button>
             </form> --}}
 
-            <div class="flex h-full w-full flex-col p-4">
-                <h1 class="mb-5 py-3 text-xl font-bold text-[var(--acsentColor)]">Medication Prescribing App</h1>
+            <div class="flex h-full w-full flex-col p-1 lg:p-4">
+                <h1 class="mb-5 hidden py-3 text-xl font-bold text-[var(--acsentColor)] lg:block">Medication Prescribing
+                    App</h1>
                 <div class="relative h-full flex-1">
                     <x-dashboard.navigation />
 
-                    <div class="absolute bottom-0 left-0 h-fit w-full">
-                        <div class="my-2 h-fit w-full">
+                    <div class="absolute bottom-5 left-0 h-fit w-full">
+                        <div class="my-2 hidden h-fit w-full lg:block">
                             <div class="w-full text-sm font-medium text-gray-600">Welcome,</div>
                             <div class="text-sm font-bold text-gray-600">
                                 {{ auth()->user()->name }}

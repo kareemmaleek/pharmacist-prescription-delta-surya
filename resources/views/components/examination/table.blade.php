@@ -44,7 +44,7 @@
             {{-- {{ dd($exam[0]->doctor->name) }} --}}
 
             @foreach ($exam as $examination)
-                <tr class="border-b bg-white hover:bg-green-100">
+                <tr class="border-b bg-white text-sm hover:bg-green-100 md:text-base">
                     <th scope="row" class="whitespace-nowrap px-6 py-2 font-medium">
                         {{ $examination->patient->patient_code . ' | ' . $examination->patient->fullname }}
                     </th>

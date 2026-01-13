@@ -1,4 +1,4 @@
-<div class="h-full w-[550px] overflow-y-auto px-5 py-5">
+<div class="h-full w-full overflow-y-auto px-2 py-5 md:px-5 lg:w-[550px]">
 
     <form action="{{ route('create_new_users') }}" method="POST">
         @csrf

@@ -15,7 +15,7 @@
         }
 
     },
-}" class="h-full w-[580px] overflow-auto px-2 py-5">
+}" class="h-full w-full overflow-auto px-2 py-5 md:px-5 lg:w-[580px]">
 
     <form action="{{ route('create_new_transaction', $exam->examination_code) }}" method="POST">
         @csrf

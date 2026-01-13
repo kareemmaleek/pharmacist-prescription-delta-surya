@@ -1,24 +1,10 @@
 @props(['patients', 'medicines'])
 
-<div class="h-full w-full overflow-y-auto px-5 py-5">
+<div class="h-full w-full overflow-y-auto p-1 md:p-5">
+    <div class="h-full w-full lg:w-[580px]">
 
-    <form action="{{ route('create_new_exam') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="h-full w-[580px]">
-
-            {{-- <div class="py-1">
-                <label for="full_name" class="text-xs uppercase tracking-wider">Patient</label>
-                <select name="patient"
-                    class="my-1 w-full rounded-md px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)]">
-                    <option selected disabled>Select patient here...</option>
-                    @foreach ($patients as $patient)
-                        <option value="{{ $patient->patient_code }}">
-                            {{ $patient->patient_code . ' | ' . $patient->fullname . ' | ' . $patient->phone_number }}
-                        </option>
-                    @endforeach
-
-                </select>
-            </div> --}}
+        <form action="{{ route('create_new_exam') }}" method="POST" enctype="multipart/form-data">
+            @csrf
 
             <div class="py-1">
                 <label for="patient" class="text-xs uppercase tracking-wider">Patient</label>
@@ -37,55 +23,56 @@
                 <label for="full_name" class="text-xs uppercase tracking-wider">Vital Sign</label>
                 <div class="h-fit w-full rounded-md bg-gray-100 p-3">
 
-                    <div class="grid h-fit w-full grid-cols-4 gap-2">
+                    <div class="grid h-fit w-full grid-cols-2 gap-2 md:grid-cols-4">
 
                         <div class="w-fit font-bold">
                             <label for="height" class="text-xs uppercase tracking-wider">Height</label>
                             <input type="number" name="height" value="{{ old('height') }}"
-                                class="my-1 w-32 rounded-md bg-white px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)]"
+                                class="my-1 w-24 rounded-md bg-white px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)] md:w-32"
                                 placeholder="height (cm)">
                         </div>
 
                         <div class="w-fit font-bold">
                             <label for="weight" class="text-xs uppercase tracking-wider">Weight</label>
                             <input type="number" name="weight" value="{{ old('weight') }}"
-                                class="my-1 w-32 rounded-md bg-white px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)]"
+                                class="my-1 w-24 rounded-md bg-white px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)] md:w-32"
                                 placeholder="weight (kg)">
                         </div>
 
                         <div class="w-fit font-bold">
                             <label for="systole" class="text-xs uppercase tracking-wider">Systole</label>
                             <input type="number" name="systole" value="{{ old('systole') }}"
-                                class="my-1 w-32 rounded-md bg-white px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)]"
+                                class="my-1 w-24 rounded-md bg-white px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)] md:w-32"
                                 placeholder="systole">
                         </div>
 
                         <div class="w-fit font-bold">
                             <label for="diastole" class="text-xs uppercase tracking-wider">Diastole</label>
                             <input type="number" name="diastole" value="{{ old('diastole') }}"
-                                class="my-1 w-32 rounded-md bg-white px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)]"
+                                class="my-1 w-24 rounded-md bg-white px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)] md:w-32"
                                 placeholder="diastole">
                         </div>
 
                         <div class="w-fit font-bold">
                             <label for="heart_rate" class="text-xs uppercase tracking-wider">Heart Rate</label>
                             <input type="number" name="heart_rate" value="{{ old('heart_rate') }}"
-                                class="my-1 w-32 rounded-md bg-white px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)]"
+                                class="my-1 w-24 rounded-md bg-white px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)] md:w-32"
                                 placeholder="heart rate">
                         </div>
 
                         <div class="w-fit font-bold">
-                            <label for="respiration_rate" class="text-xs uppercase tracking-wider">Respiration
+                            <label for="respiration_rate"
+                                class="text-[9px] uppercase tracking-wider md:text-xs">Respiration
                                 Rate</label>
                             <input type="number" name="respiration_rate" value="{{ old('respiration_rate') }}"
-                                class="my-1 w-32 rounded-md bg-white px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)]"
+                                class="my-1 w-24 rounded-md bg-white px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)] md:w-32"
                                 placeholder="respiration rate">
                         </div>
 
                         <div class="w-fit font-bold">
                             <label for="body_temp" class="text-xs uppercase tracking-wider">Body Temp</label>
                             <input type="number" name="body_temp" step=".1" value="{{ old('body_temp') }}"
-                                class="my-1 w-32 rounded-md bg-white px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)]"
+                                class="my-1 w-24 rounded-md bg-white px-3 py-2 text-sm font-medium outline-0 ring-1 focus:ring-[var(--acsentColor)] md:w-32"
                                 placeholder="body temp">
                         </div>
 
@@ -209,17 +196,13 @@
                 </div>
 
             </div>
-        </div>
-
-        <div class="w-[580px] py-1">
-            <button type="submit"
-                class="my-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-[var(--acsentColor)] px-4 py-2 text-center font-medium text-white hover:opacity-90">
-                <x-heroicon-o-check-circle class="h-5 w-5" />
-                Submit
-            </button>
-        </div>
-
-</div>
-
-</form>
+            <div class="w-full py-1 lg:w-[580px]">
+                <button type="submit"
+                    class="my-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-[var(--acsentColor)] px-4 py-2 text-center font-medium text-white hover:opacity-90">
+                    <x-heroicon-o-check-circle class="h-5 w-5" />
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

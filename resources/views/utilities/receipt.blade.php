@@ -126,8 +126,9 @@
                 <thead>
                     <tr class="border-b">
                         <th class="text-left">Item</th>
+                        <th class="text-right">Price</th>
                         <th class="text-center">Qty</th>
-                        <th class="text-right">Unit Price</th>
+                        <th class="text-right">Subtotal</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -135,8 +136,9 @@
                     @foreach ($tx->examination->medicine_prescription_data['data'] as $medicine)
                         <tr class="text-xs">
                             <td>{{ $medicine['name'] }}</td>
-                            <td class="text-center">{{ $medicine['qty'] }}</td>
                             <td class="text-right">{{ Number::currency($medicine['unit_price'], precision: 0) }}</td>
+                            <td class="text-center">x{{ $medicine['qty'] }}</td>
+                            <td class="text-center">{{ Number::currency($medicine['subtotal'], precision: 0) }}</td>
                         </tr>
                     @endforeach
 
@@ -148,7 +150,7 @@
             <table>
                 <tbody>
                     <tr class="text-right text-xs">
-                        <th>Subtotal: </th>
+                        <th>Total: </th>
                         <td>{{ Number::currency($tx->payment_total, precision: 0) }}</td>
                     </tr>
                     <tr class="text-right text-xs">

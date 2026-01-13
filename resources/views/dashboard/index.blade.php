@@ -2,13 +2,13 @@
 
     <div class="flex h-full w-full flex-col gap-3 p-3">
 
-        <div class="h-fit w-full rounded-md bg-white px-10 py-5">
+        <div class="h-fit w-full rounded-md bg-white px-5 py-5 md:px-10">
             <h2 class="text-xl font-bold">
                 Dashboard
             </h2>
 
-            <div class="my-5 grid w-full grid-cols-5 gap-4">
-                <div class="bg-linear-120 h-24 w-[200px] rounded-md from-[#00c1a6] to-[#0082ba] p-3">
+            <div class="my-5 grid w-full grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5">
+                <div class="bg-linear-120 h-24 w-full rounded-md from-[#00c1a6] to-[#0082ba] p-3 md:w-[200px]">
                     <h3 class="font-medium text-white">Patiens</h3>
                     <div class="flex h-full w-full items-center justify-end text-white">
                         <span class="px-2 text-right text-3xl font-bold">{{ $data['total_patient'] }}</span>
@@ -16,7 +16,7 @@
                     </div>
                 </div>
 
-                <div class="bg-linear-120 h-24 w-[200px] rounded-md from-[#00c1a6] to-[#0082ba] p-3">
+                <div class="bg-linear-120 h-24 w-full rounded-md from-[#00c1a6] to-[#0082ba] p-3 md:w-[200px]">
                     <h3 class="font-medium text-white">Examinations</h3>
                     <div class="flex h-full w-full items-center justify-end text-white">
                         <span class="px-2 text-right text-3xl font-bold">{{ $data['total_examination'] }}</span>
@@ -24,7 +24,7 @@
                     </div>
                 </div>
 
-                <div class="bg-linear-120 h-24 w-[200px] rounded-md from-[#00c1a6] to-[#0082ba] p-3">
+                <div class="bg-linear-120 h-24 w-full rounded-md from-[#00c1a6] to-[#0082ba] p-3 md:w-[200px]">
                     <h3 class="font-medium text-white">Transactions</h3>
                     <div class="flex h-full w-full items-center justify-end text-white">
                         <span class="px-2 text-right text-3xl font-bold">{{ $data['total_transaction'] }}</span>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                <div class="bg-linear-120 h-24 w-[200px] rounded-md from-[#00c1a6] to-[#0082ba] p-3">
+                <div class="bg-linear-120 h-24 w-full rounded-md from-[#00c1a6] to-[#0082ba] p-3 md:w-[200px]">
                     <h3 class="font-medium text-white">TX Income</h3>
                     <div class="flex h-full w-full items-center justify-end text-white">
                         <span
@@ -41,7 +41,7 @@
                     </div>
                 </div>
 
-                <div class="bg-linear-120 h-24 w-[200px] rounded-md from-[#00c1a6] to-[#0082ba] p-3">
+                <div class="bg-linear-120 h-24 w-full rounded-md from-[#00c1a6] to-[#0082ba] p-3 md:w-[200px]">
                     <h3 class="font-medium text-white">Medicine Sold</h3>
                     <div class="flex h-full w-full items-center justify-end text-white">
                         <span class="px-2 text-right text-3xl font-bold">{{ $data['medicine_sold'] }}</span>
