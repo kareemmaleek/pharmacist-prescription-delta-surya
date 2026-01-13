@@ -21,5 +21,21 @@ class Adminseeder extends Seeder
             "email" => "musafeerbinmalik@gmail.com",
             "password" => Hash::make(config('seeder.default_password'))
         ]);
+
+        User::factory()->create([
+            "role" => 1,
+            "name" => "Raden Suyoso",
+            "username" => "radensuyoso",
+            "email" => "radensuyoso@gmail.com",
+            "password" => Hash::make(config('seeder.default_password'))
+        ]);
+
+        User::factory()->create([
+            "role" => 2,
+            "name" => "dr. Abdul Maqruf",
+            "username" => "abdulmaqruf",
+            "email" => "abdulmaqruf@gmail.com",
+            "password" => Hash::make(config('seeder.default_password'))
+        ]);
     }
 }
