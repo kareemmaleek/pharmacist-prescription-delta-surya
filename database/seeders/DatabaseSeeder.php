@@ -7,6 +7,7 @@ use App\Models\Patient;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Ramsey\Uuid\Uuid;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,7 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call(Adminseeder::class);
 
         User::factory(5)->create([
+            
             "role" => fn () => rand(1,2),
+            
         ]);
 
         Patient::factory(25)->create([

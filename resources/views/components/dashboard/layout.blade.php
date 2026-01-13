@@ -33,6 +33,16 @@
                     <x-dashboard.navigation />
 
                     <div class="absolute bottom-0 left-0 h-fit w-full">
+                        <div class="my-2 h-fit w-full">
+                            <div class="w-full text-sm font-medium text-gray-600">Welcome,</div>
+                            <div class="text-sm font-bold text-gray-600">
+                                {{ auth()->user()->name }}
+                            </div>
+
+                            <div class="text-xs text-gray-400">
+                                {{ auth()->user()->username }}
+                            </div>
+                        </div>
                         <form action="{{ route('proceed_logout') }}" method="POST">
                             @csrf
                             <button type="submit"

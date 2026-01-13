@@ -8,10 +8,11 @@ use App\Services\PatientService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PatientController extends Controller
+class PatientController
 {
     public function indexPatient()
     {
+        
         $query = Patient::query();
 
         $patients = $query->paginate(15)->withQueryString();
@@ -21,6 +22,8 @@ class PatientController extends Controller
 
     public function indexNewPatient()
     {
+        if(Auth::user()->role !== 0) return redirect()->route('dashboard')->with('error', 'No Permission!');
+        
         return view('patient.newpatient');
     }
 

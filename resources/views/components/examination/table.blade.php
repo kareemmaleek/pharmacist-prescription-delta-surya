@@ -131,26 +131,33 @@
                         <div class="flex items-center gap-2">
 
                             @if ($examination->status == 'prescribed')
-                                <a href="{{ route('edit_exam', $examination->examination_code) }}"
-                                    class="cursor-pointer rounded-sm bg-sky-400 p-1 text-white hover:opacity-90">
-                                    <x-heroicon-o-pencil-square class="h-4 w-4" />
-                                </a>
+                                @if (auth()->user()->role == 2 || auth()->user()->role == 0)
+                                    <a href="{{ route('edit_exam', $examination->examination_code) }}"
+                                        class="cursor-pointer rounded-sm bg-sky-400 p-1 text-white hover:opacity-90">
+                                        <x-heroicon-o-pencil-square class="h-4 w-4" />
+                                    </a>
+                                @endif
 
-                                <a href="{{ route('new_transaction', $examination->examination_code) }}"
-                                    class="cursor-pointer rounded-sm bg-emerald-400 p-1 text-white hover:opacity-90">
-                                    <x-heroicon-o-document-currency-dollar class="h-4 w-4" />
-                                </a>
+                                @if (auth()->user()->role == 1 || auth()->user()->role == 0)
+                                    <a href="{{ route('new_transaction', $examination->examination_code) }}"
+                                        class="cursor-pointer rounded-sm bg-emerald-400 p-1 text-white hover:opacity-90">
+                                        <x-heroicon-o-document-currency-dollar class="h-4 w-4" />
+                                    </a>
+                                @endif
                             @endif
 
-                            <form action="{{ route('delete_exam', $examination->examination_code) }}" method="POST">
-                                @csrf @method('DELETE')
+                            @if (auth()->user()->role == 2 || auth()->user()->role == 0)
+                                <form action="{{ route('delete_exam', $examination->examination_code) }}"
+                                    method="POST">
+                                    @csrf @method('DELETE')
 
-                                <button type="submit"
-                                    class="cursor-pointer rounded-sm bg-red-400 p-1 text-white hover:opacity-90">
-                                    <x-heroicon-o-trash class="h-4 w-4" />
-                                </button>
+                                    <button type="submit"
+                                        class="cursor-pointer rounded-sm bg-red-400 p-1 text-white hover:opacity-90">
+                                        <x-heroicon-o-trash class="h-4 w-4" />
+                                    </button>
 
-                            </form>
+                                </form>
+                            @endif
 
                         </div>
                     </td>

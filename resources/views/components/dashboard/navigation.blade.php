@@ -17,21 +17,25 @@
     <span class="text-sm font-medium">Examination</span>
 </x-dashboard.nav-link>
 
-<x-dashboard.nav-link href="{{ route('transaction') }}" :active="request()->is('transaction*')">
-    <x-heroicon-o-banknotes class="h-5 w-5" />
-    <span class="text-sm font-medium">Transactions</span>
-</x-dashboard.nav-link>
+@if (auth()->user()->role == 0 || auth()->user()->role == 1)
+    <x-dashboard.nav-link href="{{ route('transaction') }}" :active="request()->is('transaction*')">
+        <x-heroicon-o-banknotes class="h-5 w-5" />
+        <span class="text-sm font-medium">Transactions</span>
+    </x-dashboard.nav-link>
+@endif
 
-<div class="w-full px-2">
-    <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400">management</span>
-</div>
+@if (auth()->user()->role == 0)
+    <div class="w-full px-2">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400">management</span>
+    </div>
 
-<x-dashboard.nav-link href="/" :active="request()->is('/examination')">
-    <x-heroicon-o-users class="h-5 w-5" />
-    <span class="text-sm font-medium">Users</span>
-</x-dashboard.nav-link>
+    <x-dashboard.nav-link href="{{ route('users') }}" :active="request()->is('users*')">
+        <x-heroicon-o-users class="h-5 w-5" />
+        <span class="text-sm font-medium">Users</span>
+    </x-dashboard.nav-link>
 
-<x-dashboard.nav-link href="/" :active="request()->is('/examination')">
-    <x-heroicon-o-document-magnifying-glass class="h-5 w-5" />
-    <span class="text-sm font-medium">Audit Log</span>
-</x-dashboard.nav-link>
+    <x-dashboard.nav-link href="{{ route('audit_logs') }}" :active="request()->is('audit-logs*')">
+        <x-heroicon-o-document-magnifying-glass class="h-5 w-5" />
+        <span class="text-sm font-medium">Audit Log</span>
+    </x-dashboard.nav-link>
+@endif

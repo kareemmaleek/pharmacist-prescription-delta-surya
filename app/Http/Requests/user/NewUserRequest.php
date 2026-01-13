@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\patient;
+namespace App\Http\Requests\user;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NewPatientRequest extends FormRequest
+class NewUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,19 +22,16 @@ class NewPatientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "full_name" => 'required|string',
-            "phone_number" => [
-                'required',
-                'regex:/^(08|628)[0-9]{8,11}$/',
-                'unique:patients,phone_number'
-            ]
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'phone_number.regex' => 'phone number format not valid (08xxxxxxxxxx).',
+            'name' => 'required|string',
+            'username' => 'required|string|unique:users,username',
+            'email' => 'required|email|unique:users,email',
+            'role' => 'required|integer',
+            'password' => 'required|min:8|alpha_num|confirmed',
+            'password_confirmation' => 'required'
         ];
     }
 }
+
+
+
+

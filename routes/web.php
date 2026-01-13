@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuditLogsController;
 use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\TransactionController;
@@ -33,7 +34,19 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/receipt/{tx_code}', [TransactionController::class, 'indexReceipt'])->name('receipt');
         Route::get('/receipt/{tx_code}/download', [TransactionController::class, 'createReceipt'])->name('create_receipt');
         Route::post('/new/{exam_id}', [TransactionController::class, 'createNewTransaction'])->name('create_new_transaction');
+    });
 
+    Route::prefix('users')->group(function (){
+        Route::get('/', [UserController::class, 'indexUser'])->name('users');
+        Route::get('/new', [UserController::class, 'indexNewUser'])->name('users_new');
+        Route::get('/edit/{uid}', [UserController::class, 'indexEditUser'])->name('users_edit');
+        Route::post('/new', [UserController::class, 'createNewUser'])->name('create_new_users');
+        Route::post('/status/change', [UserController::class, 'proceedChangeStatus'])->name('users_status_change');
+        Route::put('/edit/{uid}', [UserController::class, 'updateUser'])->name('update_user');
+    });
+
+    Route::prefix('audit-logs')->group(function () {
+        Route::get('/', [AuditLogsController::class, 'indexAuditLogs'])->name('audit_logs');
     });
 });
 
